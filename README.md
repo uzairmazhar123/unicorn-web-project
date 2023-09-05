@@ -41,3 +41,17 @@ After that we need to extend our deployment pipeline to add a manual approval st
     - Update CodePipeline
     - Add approval stage 
     - Add production deployment stage	
+
+### Container build
+Now we will modify our pipeline to build a container image using CodeBuild and push this to Amazon Elastic Container Registry (ECR)
+1. Add files for docker build
+    The Dockerfile is in the root directory of the repository. 
+2. Create a new file named `buildspec_docker.yml` in the same folder 
+3. Modify the existing `buildspec.yml` file to include the additional artifact files (Dockerfile and buildspec_docker.yml).
+4. Create an Amazon ECR repository
+5. Create a new CodeBuild build project
+6. Set build project IAM role permission
+    Locate the auto-generated role for the new CodeBuild build project
+    Attach the `UnicornECRPush.json` policy to it. The policy document is under `unicorn-web-project/IAM-policies/` on the git repository. 
+7. Test the CodeBuild project
+
